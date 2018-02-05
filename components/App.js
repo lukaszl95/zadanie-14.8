@@ -21,30 +21,21 @@ App = React.createClass({
         }.bind(this));
     },
 
-    getGif: function(searchingText, callback) {
-        var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText).data;
-                var gif = {};
-
-                if(data.length !== 0) {
-                    gif = {
-                        url: data.fixed_width_downsampled_url,
-                        sourceUrl: data.url,
-                    };
-                } else {
-                    gif = {
-                        url: 'nonMatches.png',
-                        sourceUrl: '',
-                    };
-                }
-                callback(gif);
-            }
-        };
-        xhr.send();
+    getGif: function(searchingText, callback) {  // 1.
+    var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText;  // 2.
+    var xhr = new XMLHttpRequest();  // 3.
+    xhr.open('GET', url);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+           var data = JSON.parse(xhr.responseText).data; // 4.
+            var gif = {  // 5.
+                url: data.fixed_width_downsampled_url,
+                sourceUrl: data.url
+            };
+            callback(gif);  // 6.
+        }
+    };
+    xhr.send();
     },
 
     render: function(){
@@ -59,9 +50,7 @@ App = React.createClass({
             <div style={styles}>
                 <h1>Gif searcher</h1>
                 <p>Find gif on <a href='http=://giphy'>giphy</a>. Press ENTER for start search more gifs.</p>
-                <Search 
-                    onSearch={this.handleSearch}
-                />
+                <Search onSearch={this.handleSearch}/>
                 <Gif 
                     loading={this.state.loading}
                     url={this.state.gif.url}

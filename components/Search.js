@@ -33,7 +33,7 @@ Search = React.createClass({
                  type='text'
                  onChange={this.handleChange}
                  onKeyUp={this.handleKeyUp}
-                 placeholder='Please, here enter a phrase'
+                 placeholder='Tutaj wpisz wyszukiwaną frazę'
                  style={styles}
                  value={this.state.searchingText}
                 />
