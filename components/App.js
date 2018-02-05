@@ -1,3 +1,5 @@
+var GIPHY_API_URL = 'https://api.giphy.com';
+
 App = React.createClass({
     getInitialState: function() {
         return {
